@@ -1,4 +1,5 @@
 import django_filters
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import BaseFilterBackend
 
 from api.models import Address
@@ -12,21 +13,14 @@ class AddressFilter(django_filters.FilterSet):
     country = django_filters.CharFilter(lookup_expr="icontains")
     house_number = django_filters.CharFilter(lookup_expr="iexact")
     postcode = django_filters.CharFilter(lookup_expr="iexact")
+    id = django_filters.NumberFilter(lookup_expr="exact")
 
     class Meta:
         model = Address
-        fields = [
-            "contact_name",
-            "road",
-            "house_number",
-            "postcode",
-            "city",
-            "state",
-            "country",
-        ]
+        fields = {"id": ["in"]}
 
 
-class IsOwnerFilterBackend(BaseFilterBackend):
+class IsOwnerFilterBackend(DjangoFilterBackend):
     """ "
     Filter that only allows users to get their own objects
     """
@@ -35,4 +29,5 @@ class IsOwnerFilterBackend(BaseFilterBackend):
         if not request.user.id:
             return Address.objects.none()
 
-        return queryset.filter(owner=request.user)
+        # TODO I am not sure if this is the best implementation
+        return super().filter_queryset(request, queryset, view).filter(owner=request.user)

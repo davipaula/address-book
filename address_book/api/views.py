@@ -1,10 +1,6 @@
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
-from django.views.decorators.csrf import csrf_exempt
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, permissions
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -30,6 +26,12 @@ class AddressList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def delete(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        queryset.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class UserList(generics.ListAPIView):

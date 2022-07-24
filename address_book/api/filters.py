@@ -27,7 +27,7 @@ class AddressFilter(django_filters.FilterSet):
 
 
 class IsOwnerFilterBackend(BaseFilterBackend):
-    """"
+    """ "
     Filter that only allows users to get their own objects
     """
 

@@ -23,7 +23,7 @@ To start using this application, you need to install the dependencies and run a 
 ```
 5. Run migrations
 ```bash
-(venv) [alice@laptop address_book] python manage.py makemigrations
+(venv) [alice@laptop address_book] python manage.py makemigrations api
 (venv) [alice@laptop address_book] python manage.py migrate 
 ```
 6. Start the server
@@ -140,3 +140,4 @@ This application can evolve in a number of ways. Here I list some of the feature
 I opted to not implement this feature because I would need more clarification on what is a duplicated address. I assume the same contact can have multiple addresses (e.g. home address, work address, address abroad etc.). Also, multiple people can be connected to the same address (think of a work address of a large company. Multiple contacts can be associated to this same address). To implement the right feature, I would prefer to experiment with the users and understand what works better for them. 
 2. **Validation of addresses:** Users can add addresses from _any_ part of the world. This makes it hard to validate all the addresses to avoid misspellings and usage of different names to represent the same place (e.g. US, USA, United States of America) 
 3. **Ordering:** Currently the results are always ordered by the contact name. In a next iteration users could be able to sort it using different criteria.
+4. **Improve tests:** As this project relies on all the good things Django provides out-of-the-shelf - which are extensively tested by the Django community -, the tests cover only the basic functionalities of the application to make sure the features are working as expected. However, the tests could be refactored to be more readable and to cover any possible edge case. 

@@ -7,14 +7,14 @@ from rest_framework.views import APIView
 from api.custom_pagination import CustomPagination
 from api.filters import AddressFilter, IsOwnerFilterBackend
 from api.models import Address
-from api.permissions import IsOwnerOrReadOnly
+from api.permissions import IsOwner
 from api.serializers import AddressSerializer, UserSerializer
 
 
 class AddressDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
 
 
 class AddressList(generics.ListCreateAPIView):

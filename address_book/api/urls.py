@@ -10,4 +10,5 @@ urlpatterns = [
     path("v1/users/<int:pk>", views.UserDetail.as_view()),
     path("v1/auth/login/", obtain_auth_token),
     path("v1/auth/logout/", views.Logout.as_view()),
+    path("", views.AddressList.as_view())
 ]

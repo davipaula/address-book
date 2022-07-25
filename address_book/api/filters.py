@@ -1,6 +1,5 @@
 import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import BaseFilterBackend
 
 from api.models import Address
 
@@ -30,4 +29,6 @@ class IsOwnerFilterBackend(DjangoFilterBackend):
             return Address.objects.none()
 
         # TODO I am not sure if this is the best implementation
-        return super().filter_queryset(request, queryset, view).filter(owner=request.user)
+        return (
+            super().filter_queryset(request, queryset, view).filter(owner=request.user)
+        )

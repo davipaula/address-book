@@ -69,7 +69,7 @@ curl --request GET \
 ```
 
 #### Logging out via endpoints
-Users can logout with a GET request to http://localhost:8000/v1/auth/logout/ 
+Users can logout with a GET request to http://localhost:8000/v1/auth/logout/ Please note that a token needs to be included in the Authorization header.
 
 ### Endpoints
 
@@ -110,7 +110,7 @@ The following example filters by contact name containing `john` and the state `c
 ```bash
 curl --request GET \
   --url 'http://localhost:8000/v1/addresses/?contact_name=john&state=california' \
-  --header 'Authorization: Token MyToken'
+  --header 'Authorization: Token MyGeneratedToken'
  ```
 
 **Pagination**: The following query parameters can be used for pagination:
